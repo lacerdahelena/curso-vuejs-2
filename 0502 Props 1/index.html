@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <lista-produtos :frutas="lista" titulo="Esse é o título"></lista-produtos>
+    </div>
+
+    <script>
+        
+        const ItemProduto = {
+            name: "ItemProduto",
+            props: ["nomeFruta"],
+            template: `
+                <li>
+                    <h2>{{nomeFruta}}</h2>
+                    Esse é o nome: {{nomeFruta}}
+                </li>
+            `
+        }
+
+        const ListaProdutos = {
+            name: "ListaProdutos",
+            props: ["frutas", "titulo"],
+            components: {
+                ItemProduto
+            },
+            template: `
+                <div>
+                    <h2>{{titulo}}</h2>
+                    <ul>
+                        <item-produto v-for="fruta, index in frutas" :nomeFruta="fruta" :key="fruta + index"></item-produto>
+                    </ul>
+                </div>
+            `
+        }
+
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                lista: ["banana", "laranja", "uva"]
+            },
+            components: {
+                ListaProdutos
+            }
+        })
+    </script>
+
+</body>
+
+</html>

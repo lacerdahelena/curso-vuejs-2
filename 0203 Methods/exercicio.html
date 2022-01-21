@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <button @click="getPrice">Ver Preço</button>
+        <p>Valor: {{result.latestPrice}}</p>
+        <p>Data: {{result.latestTime}}</p>
+        <p>Empresa: {{result.companyName}}</p>
+    </div>
+<script>
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            result: {}
+        },
+        methods: {
+            getPrice() {
+                fetch('https://cloud.iexapis.com/stable/stock/aapl/quote?token=sk_7b53e65a4c0e4b2b905e400ea1484d9a').then(response => response.json()).then(json => {
+                    console.log(json)
+                    this.result = json
+                })
+            }  
+        }
+    })
+</script>
+
+</body>
+</html>

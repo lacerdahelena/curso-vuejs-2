@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+    <mostrar-tempo></mostrar-tempo>
+    <mercado-apple></mercado-apple>
+    </div>
+
+    <script type="module">
+        import MostrarTempo from './components/MostrarTempo.js';
+        import MercadoApple from './components/MercadoApple.js';
+
+        Vue.component("MostrarTempo", MostrarTempo);
+
+        const vm = new Vue({
+            el: "#app", 
+            components: {
+                MercadoApple: MercadoApple
+            }
+        })
+    </script>
+
+</body>
+
+</html>

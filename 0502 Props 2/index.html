@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        {{total}}
+       <botao-contador :valor="total"></botao-contador>
+    </div>
+
+    <script>
+
+        const BotaoContador = {
+            name: "BotaoContador",
+            props: {
+                valor: Number
+            },
+            data() {
+                return {
+                    valorAtual: this.valor //perde a referência de valor, tem o valor somente do primeiro carregamento
+                }
+            },
+            template: `<button @click="valorAtual++">Esse é o total {{valorAtual}}</button>`
+        }
+        
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                total: 0
+            },
+            components: {
+                BotaoContador
+            }
+        })
+    </script>
+
+</body>
+
+</html>

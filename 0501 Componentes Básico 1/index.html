@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- <componente-global></componente-global> -->
+        <componente-local></componente-local>
+        <componente-local2></componente-local2>
+    </div>
+
+    <script>
+        const ComponenteLocal = {
+            name: "ComponenteLocal",
+            template: `
+                <div>
+                    <componente-global></componente-global>
+                    <p>Componente Local</p>
+                </div>
+            `
+        }
+
+        const ComponenteLocal2 = {
+            name: "ComponenteLocal2",
+            data() {
+                return {
+                    numero: 20
+                }
+            },
+            template: `
+                <div>
+                    <p>Componente Local2</p>
+                    <p>Numero {{numero}}. Dobro: {{numeroDobro}}</p>
+                </div>
+            `,
+            computed: {
+                numeroDobro() {
+                    return this.numero * 2;
+                }
+            }
+        }
+
+        Vue.component('ComponenteGlobal', {
+            template: `<p>isso é global</p>`
+        })
+
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                ComponenteLocal,
+                ComponenteLocal2
+            }
+        })
+    </script>
+
+</body>
+
+</html>

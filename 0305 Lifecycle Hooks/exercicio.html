@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue.js</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">   
+    <ul>
+      <li v-for="(valor, chave) in githubData">{{chave}}: {{valor}}</li>
+    </ul>
+
+    <button @click="contador++">adicionar {{contador}}</button>
+  </div>
+
+  <!-- Utilize a api do github para
+mostrar todos os seus dados na tela.
+Faça o fetch das informações utilizando
+um dos hooks do vue:
+
+https://api.github.com/users/origamid (utilize o seu usuário)
+ -->
+
+<!-- 
+  Crie um contador, onde seja possível clicar em
+  um botão e adicionar +1 ao número.
+
+  Toda vez que o contador mudar, mude o título da página
+  para o total do contador. Utilize um hook para isso
+ -->
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        githubData: {},
+        contador: 0
+      },
+      methods: {
+        getData() {
+          fetch('https://api.github.com/users/lacerdahelena')
+          .then(response => response.json()).then(json => {
+            this.githubData = json
+          })
+        }
+      },
+      updated() {
+        document.title = this.contador;
+      },
+      created(){
+        this.getData()
+        console.log(this.githubData)
+      }
+    })
+  </script>
+  
+</body>
+
+</html>

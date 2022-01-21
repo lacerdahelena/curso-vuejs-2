@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+       
+    </div>
+
+<!-- 
+  Crie um componente com um campo de input e um botão para enviar o valor.
+  Nesse campo de input será possível escrever o simbolo de empresas americanas
+
+  simbolos ex:
+  aapl -> Apple
+  goog -> Google
+  msft -> Microsoft
+  amzn -> Amazon
+  fb -> Facebook
+
+  Ao clicar no botão, faça um fetch com a API:
+  https://api.origamid.dev/stock/${SIMBOLO}/quote
+
+  O resultado do fetch deverá ser mostrado em um componente filho do formulário.
+  Envia as informações utilizando prop
+ 
+  Mostre todas as informações do fetch utilizando um loop.
+ -->
+
+    <script>
+
+       const EmpresaAmericana = {
+           name: "EmpresaAmericana",
+           template: `
+                <div>
+                    <input type="text" :v-model="simbolo"/>
+                    <button>Enviar</button>
+                </div>
+            `
+       }
+        
+        const vm = new Vue({
+            el: "#app",
+            data: {
+            },
+            components: {
+            }
+        })
+    </script>
+
+</body>
+
+</html>

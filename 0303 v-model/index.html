@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- two way data bind-->
+        <input v-model="nome" type="text">
+        <p>{{nome}}</p>
+        <textarea v-model="mensagem"></textarea>
+        <p>{{mensagem}}</p>
+
+        <!-- one way data bind -->
+        <input :value="email">
+        <input v-model.trim="email" type="text">
+        <p>{{email}}</p>
+
+        <p>Radio</p>
+        <input v-model="cor" type="radio" name="azul" id="azul" value="Azul">
+        <label for="azul">Azul</label>
+        <input v-model="cor" type="radio" name="vermelho" id="vermelho" value="Vermelho">
+        <label for="vermelho">Vermelho</label>
+        <input v-model="cor" type="radio" name="verde" id="verde" value="Verde">
+        <label for="verde">Verde</label>
+
+        <p>{{cor}}</p>
+
+        <hr/>
+
+        <select v-model="frutas">
+            <option disabled value="">Selecione uma fruta</option>
+            <option value="banana">banana</option>
+            <option value="morango">morango</option>
+            <option value="uva">uva</option>
+        </select>
+
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                nome: "",
+                mensagem: "",
+                email: "helena@teste.com",
+                cor: "",
+                frutas: ""
+            },
+            computed: {
+            }
+        })
+    </script>
+
+    <style>
+    </style>
+</body>
+
+</html>

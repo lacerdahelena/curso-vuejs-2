@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <p :style="{color: resultApple.marketCap > resultGoogle.marketCap ? 'green' : 'red'}">
+            {{resultApple.companyName}}, {{resultApple.marketCap}}
+        </p>
+        
+        <p :style="{color: resultGoogle.marketCap > resultApple.marketCap ? 'green' : 'red'}">{{resultGoogle.companyName}}, {{resultGoogle.marketCap}}</p>
+        <button @click="pegarAcoes">Comparar Ações</button>
+    </div>
+    
+<script>
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            resultGoogle: {},
+            resultApple: {}
+        },
+        methods: {
+           pegarAcoes(empresa) {
+            fetch('https://cloud.iexapis.com/stable/stock/googl/quote?token=sk_7b53e65a4c0e4b2b905e400ea1484d9a')
+            .then(response => response.json())
+            .then(json => {
+                    this.resultGoogle = json
+                })
+            
+            fetch('https://cloud.iexapis.com/stable/stock/aapl/quote?token=sk_7b53e65a4c0e4b2b905e400ea1484d9a')
+            .then(response => response.json())
+            .then(json => {
+                    this.resultApple = json
+                })
+            }
+        }
+    })
+</script>
+
+
+</body>
+</html>

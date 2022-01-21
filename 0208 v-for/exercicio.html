@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <ul>
+            <li v-for="item, key in resultados">{{key}} {{item}}</li>
+        </ul>
+        <button @click="getEndereco">Buscar endereço</button>
+
+        <ul>
+            <li v-for="curso in cursos">{{curso.curso}}
+                <ul>
+                    <li v-for="aula in curso.aulas">{{aula.nome}}</li>
+                </ul>
+            </li>
+        </ul>
+        <button @click="puxarAula">Puxar Cursos</button>
+    </div>
+
+<!--
+  Utilizando a api:
+  https://viacep.com.br/ws/04538133/json/
+  Mostre o cep, logradouro, complemento, bairro, localidade e uf do que for retornado.
+
+  
+  Use o arquivo json da aula, para listar os cursos e as matérias.
+-->
+
+<script>
+   const vm = new Vue({
+        el: "#app",
+        data : {
+            resultados: {},
+            cursos: []
+        },
+        methods: {
+            getEndereco(){
+                fetch("https://viacep.com.br/ws/04538133/json/")
+                .then(data => data.json())
+                .then(result => {
+                    this.resultados = result
+                })
+            },
+            puxarAula(){
+                fetch("./cursos.json")
+                .then(result => result.json())
+                .then(r => {
+                    this.cursos = r
+                })
+            }
+        }
+   })
+</script>
+
+</body>
+</html>

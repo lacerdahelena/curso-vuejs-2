@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <ul>
+             <li>
+                <a 
+                href="https://cloud.iexapis.com/stable/stock/aapl/quote?token=sk_7b53e65a4c0e4b2b905e400ea1484d9a" 
+                @click.prevent="getApi">
+                Apple</a>
+            </li>
+            <li>
+                <a 
+                href="https://cloud.iexapis.com/stable/stock/googl/quote?token=sk_7b53e65a4c0e4b2b905e400ea1484d9a" 
+                @click.prevent="getApi">Google</a>
+            </li>
+            <li>
+                <a href="https://cloud.iexapis.com/stable/stock/amzn/quote?token=sk_7b53e65a4c0e4b2b905e400ea1484d9a" @click.prevent="getApi">Amazon</a>
+            </li>
+            <li>
+                <a href="https://cloud.iexapis.com/stable/stock/ebay/quote?token=sk_7b53e65a4c0e4b2b905e400ea1484d9a" @click.prevent="getApi">Ebay</a>
+            </li>
+            <li>
+                <a href="https://cloud.iexapis.com/stable/stock/pypl/quote?token=sk_7b53e65a4c0e4b2b905e400ea1484d9a" @click.prevent="getApi">Paypal</a>
+            </li>
+
+          </ul>
+          
+          <div>
+              <p>{{result.companyName}}</p>
+              <p>{{result.latestPrice}}</p>
+              <p>{{result.marketCap}}</p>
+          </div>
+          <!--
+            Utilizando API
+            https://api.origamid.dev/stock/aapl/quote
+          
+            Adicione um evento de clique a cada <a> do html
+            acima e previna o comportamento padrão.
+          
+            Faça o fetch dos dados do href ao click e mostre na
+            interface o companyName, latestPrice, marketCap
+          -->
+    </div>
+<script>
+   const vm = new Vue({
+        el: "#app",
+        data:{
+            result: {}
+        },
+        methods : {
+            getApi(event){
+                const url = event.currentTarget.href
+                fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    this.result = data
+                })
+            }
+        }
+   })
+</script>
+
+
+</body>
+</html>
